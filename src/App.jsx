@@ -1,7 +1,7 @@
 import { Box, Container, Text } from "@chakra-ui/react";
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+import HomePage from "./pages/HomePage";
 import Help from "./pages/Help";
 import background from "./assets/image/weatherApp-background.jpeg";
 import Favorites from "./pages/Favorites";
@@ -9,10 +9,10 @@ import Favorites from "./pages/Favorites";
 function App() {
   return (
     <Box bgImage={background} bgPosition="center" bgSize="cover" h="100vh">
-        <Navbar />
-        <Container maxW="container.md" marginY={12}>
+        <Header />
+        <Container maxW="container.md" width='100%' marginY={12}>
           <Routes>
-            <Route path="/" element={<Home />}></Route>
+            <Route path="/" element={<HomePage />}></Route>
             <Route path="favorites" element={<Favorites />}></Route>
             <Route path="help" element={<Help />}></Route>
             <Route

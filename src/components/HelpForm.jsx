@@ -16,6 +16,7 @@ import {
   useToast,
   Icon,
   InputRightElement,
+  Tooltip,
 } from "@chakra-ui/react";
 import { FaCheckCircle, FaInfo, FaPaperPlane, FaPhone } from "react-icons/fa";
 import { FaMailBulk } from "react-icons/fa";
@@ -31,7 +32,7 @@ const validate = (values) => {
   // Name validation
   if (!values.name) {
     errors.name = "Please enter a name.";
-  } else if (values.name.length < 4 || values.name.length > 10) {
+  } else if (values.name.length < 3 || values.name.length > 10) {
     errors.name = "Name must be between 4-10 characters long.";
   } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
     errors.name = "Name can only contain letters and spaces.";
@@ -42,7 +43,7 @@ const validate = (values) => {
     errors.surname = "Please enter a surname";
   } else if (values.surname.length < 4 || values.surname.length > 10) {
     errors.surname = "Surame must be between 4-10 characters long.";
-  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
+  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.surname)) {
     errors.surname = "Surname can only contain letters and spaces.";
   }
 
@@ -56,14 +57,10 @@ const validate = (values) => {
   }
 
   //Telephone validation
-  if (!values.tel) {
-    errors.tel = "Please enter a phone number.";
-  } else if (
-    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.tel)
-  ) {
+  if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.tel)) {
     errors.tel = "Phone number can only contain numbers.";
-  } else if (values.tel.length < 10) {
-    errors.tel = "Phone number must have more than 10 numbers.";
+  } else if (values.tel.length > 14) {
+    errors.tel = "Phone number must have more than 14 numbers.";
   }
 
   // We return the object with it's new props inside it
@@ -85,36 +82,33 @@ const HelpForm = ({ variant }) => {
       validate={validate}
       onSubmit={(values, { resetForm }) => {
         resetForm();
-        console.log(values);
         toast({
           isClosable: true,
-          position: "bottom-right",
-          render: () => {
-            return (
-              <Box
-                p={8}
-                borderRadius="md"
-                boxShadow="lg"
-                bgColor="green.300"
-              >
-                <HStack spacing={4}>
-                  <Icon as={<FaPaperPlane />} color="whiteAlpha.900" />
-                  <VStack>
-                    <Text fontWeight="semibold">Success !</Text>
-                    <Text>Your message has been sent successfully</Text>
-                  </VStack>
-                </HStack>
-              </Box>
-            );
-          },
-        })
+          position: "bottom",
+          title: "Success !",
+          description: "Your message has been sent successfully.",
+          status: "success",
+        });
+        console.log(JSON.stringify(values));
       }}
     >
       {({ handleChange, handleBlur, touched, values, errors }) => (
         <Form>
           <VStack spacing={8}>
             <FormControl isRequired isInvalid={touched.name && errors.name}>
-              <FormLabel>Name:</FormLabel>
+              <Tooltip
+                placement="left"
+                hasArrow
+                paddingX={4}
+                paddingY={2}
+                borderRadius="md"
+                boxShadow="md"
+                label="Is a required field"
+                marginRight={1}
+                aria-label='Is a required field'
+              >
+                <FormLabel>Name:</FormLabel>
+              </Tooltip>
               <InputGroup>
                 <InputLeftElement children={<FaInfo />}></InputLeftElement>
                 <Input
@@ -126,18 +120,11 @@ const HelpForm = ({ variant }) => {
                   onBlur={handleBlur}
                   value={values.name}
                 />
-                {errors.name ? (
+                {!errors.name && values.name.length >= 4 && (
                   <InputRightElement
-                    color="red.500"
-                    children={<IoIosWarning />}
+                    color="green.400"
+                    children={<FaCheckCircle />}
                   ></InputRightElement>
-                ) : (
-                  values.name.length >= 4 && (
-                    <InputRightElement
-                      color="green.400"
-                      children={<FaCheckCircle />}
-                    ></InputRightElement>
-                  )
                 )}
               </InputGroup>
               {touched.name && errors.name ? (
@@ -150,7 +137,19 @@ const HelpForm = ({ variant }) => {
               isRequired
               isInvalid={touched.surname && errors.surname}
             >
-              <FormLabel>Last Name:</FormLabel>
+              <Tooltip
+                placement="left"
+                hasArrow
+                paddingX={4}
+                paddingY={2}
+                borderRadius="md"
+                boxShadow="md"
+                label="Is a required field"
+                marginRight={1}
+                aria-label='Is a required field'
+              >
+                <FormLabel>Last Name:</FormLabel>
+              </Tooltip>
               <InputGroup>
                 <InputLeftElement children={<FaInfo />}></InputLeftElement>
                 <Input
@@ -162,18 +161,11 @@ const HelpForm = ({ variant }) => {
                   onBlur={handleBlur}
                   value={values.surname}
                 />
-                {errors.surname ? (
+                {!errors.surname && values.surname.length >= 4 && (
                   <InputRightElement
-                    color="red.500"
-                    children={<IoIosWarning />}
+                    color="green.400"
+                    children={<FaCheckCircle />}
                   ></InputRightElement>
-                ) : (
-                  values.surname.length >= 4 && (
-                    <InputRightElement
-                      color="green.400"
-                      children={<FaCheckCircle />}
-                    ></InputRightElement>
-                  )
                 )}
               </InputGroup>
               {touched.surname && errors.surname ? (
@@ -186,7 +178,19 @@ const HelpForm = ({ variant }) => {
             <Divider w="70%" borderColor="black" />
 
             <FormControl isRequired isInvalid={touched.email && errors.email}>
-              <FormLabel>Email:</FormLabel>
+              <Tooltip
+                placement="left"
+                hasArrow
+                paddingX={4}
+                paddingY={2}
+                borderRadius="md"
+                boxShadow="md"
+                label="Is a required field"
+                marginRight={1}
+                aria-label='Is a required field'
+              >
+                <FormLabel>E-mail:</FormLabel>
+              </Tooltip>
               <InputGroup>
                 <InputLeftElement children={<FaMailBulk />}></InputLeftElement>
                 <Input
@@ -199,18 +203,11 @@ const HelpForm = ({ variant }) => {
                   onBlur={handleBlur}
                   values={values.email}
                 />
-                {errors.email ? (
+                {values.email.length >= 4 && !errors.email && (
                   <InputRightElement
-                    color="red.500"
-                    children={<IoIosWarning />}
+                    color="green.400"
+                    children={<FaCheckCircle />}
                   ></InputRightElement>
-                ) : (
-                  values.email.length >= 4 && (
-                    <InputRightElement
-                      color="green.400"
-                      children={<FaCheckCircle />}
-                    ></InputRightElement>
-                  )
                 )}
               </InputGroup>
               {touched.email && errors.email ? (
@@ -225,27 +222,28 @@ const HelpForm = ({ variant }) => {
               <InputGroup>
                 <InputLeftElement children={<FaPhone />}></InputLeftElement>
                 <Input
-                  type="text"
+                  type="tel"
+                  name="tel"
                   placeholder="Phone number..."
                   variant={variant}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.tel}
                 />
-                {errors.tel ? (
+                {!errors.tel && values.tel.length >= 4 && (
                   <InputRightElement
-                    color="red.500"
-                    children={<IoIosWarning />}
+                    color="green.400"
+                    children={<FaCheckCircle />}
                   ></InputRightElement>
-                ) : (
-                  values.tel.length >= 4 && (
-                    <InputRightElement
-                      color="green.400"
-                      children={<FaCheckCircle />}
-                    ></InputRightElement>
-                  )
                 )}
               </InputGroup>
+              {touched.tel && errors.tel ? (
+                <FormErrorMessage>{errors.tel}</FormErrorMessage>
+              ) : (
+                <FormHelperText>
+                  * Your phone number will be used only to send you a response
+                </FormHelperText>
+              )}
             </FormControl>
 
             <Box
@@ -272,7 +270,7 @@ const HelpForm = ({ variant }) => {
               name="message"
               value={values.message}
             />
-            
+
             <Button
               variant="solid"
               colorScheme="yellow"

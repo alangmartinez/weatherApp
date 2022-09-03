@@ -9,6 +9,7 @@ const Card = () => {
   const [loading, setLoading] = useState(true);
   const [successFetch, setSuccessFetch] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isFetching, setIsFetching] = useState(true);
 
   const getWwatherData = () => {
     try {
@@ -79,10 +80,11 @@ const Card = () => {
         </VStack>
       ) : (
         <VStack alignItems="start">
-          <Text></Text>
+          <Text>{console.log(weatherData)}</Text>
           <Text as="h5" fontSize={22} fontWeight="semibold" color='whiteAlpha.900'>
             {weatherData.name}
           </Text>
+          <Text color='whiteAlpha.900' fontWeight='semibold' textTransform='capitalize'>{weatherData.weather[0].description}</Text>
         </VStack>
       )}
     </Box>

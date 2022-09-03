@@ -1,7 +1,7 @@
 import Search from "../components/Search";
 import Card from "../components/Card";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <Search />
@@ -12,4 +12,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
