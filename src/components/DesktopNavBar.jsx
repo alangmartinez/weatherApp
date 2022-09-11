@@ -1,74 +1,55 @@
 import {
   HStack,
-  Switch,
   Button,
   Text,
-  IconButton,
-  StackDivider,
-  ColorModeContext,
 } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { Link } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function DesktopNavBar() {
-  const isActiveLink = ({ isActive }) => {
-    return isActive ? { borderBottom: "2px solid" } : undefined;
-  };
-  const { colorMode, toggleColorMode } = useContext(ColorModeContext);
-
-  let isDark = colorMode === "dark";
   return (
     <>
-        <HStack divider={<StackDivider borderColor="gray.300" />} spacing={3}>
-          <Button variant="ghost" colorScheme="yellow">
-            Sign In
-          </Button>
-          <Button
-            variant="solid"
-            boxShadow="md"
-            colorScheme="yellow"
-            color="whiteAlpha.900"
-          >
-            Register
-          </Button>
-        </HStack>
-        <HStack
-          spacing={12}
-          paddingY={3}
-          fontWeight="semibold"
-          paddingX={6}
-          order={2}
-        >
-          <HStack>
-            <Switch onChange={toggleColorMode} />
-            <IconButton
-              icon={isDark ? <FaSun /> : <FaMoon />}
-              isRound
-              bgColor="transparent"
-            ></IconButton>
-          </HStack>
-          <NavLink style={isActiveLink} to="/">
+      <HStack spacing={9}>
+        <Text fontWeight="bold" fontSize="3xl">
+          Weather App
+        </Text>
+        <HStack spacing={12} paddingY={3} fontWeight="bold" paddingX={6}>
+          <Link to="/">
             <Text cursor="pointer" paddingY={3}>
               Home
             </Text>
-          </NavLink>
-          <NavLink style={isActiveLink} to="/about-us">
+          </Link>
+          <Link to="/about-us">
             <Text cursor="pointer" paddingY={3}>
               About Us
             </Text>
-          </NavLink>
-          <NavLink style={isActiveLink} to="/favorites">
+          </Link>
+          <Link to="/favorites">
             <Text cursor="pointer" paddingY={3}>
               Favorites
             </Text>
-          </NavLink>
-          <NavLink style={isActiveLink} to="/help">
+          </Link>
+          <Link to="/help">
             <Text cursor="pointer" paddingY={3}>
               Help
             </Text>
-          </NavLink>
+          </Link>
         </HStack>
+      </HStack>
+      <HStack spacing={7}>
+        <Button variant="unstyled">Sign In</Button>
+        <Button
+          variant="solid"
+          boxShadow="sm"
+          bgColor="#23A6F0"
+          color="whitesmoke"
+          size="lg"
+          borderRadius="sm"
+          rightIcon={<FaArrowRight />}
+        >
+          Register
+        </Button>
+      </HStack>
     </>
   );
 }

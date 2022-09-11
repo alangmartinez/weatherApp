@@ -1,14 +1,13 @@
-import { Box, Container, Text } from "@chakra-ui/react";
-import Header from "./components/Header";
+import { Container, Text } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import Header from "./components/Header";
+import Favorites from "./pages/favorite/Favorites";
 import Help from "./pages/Help";
-import background from "./assets/image/weatherApp-background.jpeg";
-import Favorites from "./pages/Favorites";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
-    <Box bgImage={background} bgPosition="center" bgSize="cover" h="100vh">
+    <>
         <Header />
         <Container maxW="container.md" width='100%' marginY={12}>
           <Routes>
@@ -27,7 +26,7 @@ function App() {
             ></Route>
           </Routes>
         </Container>
-    </Box>
+    </>
   );
 }
 

@@ -18,9 +18,8 @@ import {
   InputRightElement,
   Tooltip,
 } from "@chakra-ui/react";
-import { FaCheckCircle, FaInfo, FaPaperPlane, FaPhone } from "react-icons/fa";
+import { FaCheckCircle, FaInfo, FaPhone } from "react-icons/fa";
 import { FaMailBulk } from "react-icons/fa";
-import { IoIosWarning } from "react-icons/io";
 import { TbSend } from "react-icons/tb";
 import { Formik, Form } from "formik";
 

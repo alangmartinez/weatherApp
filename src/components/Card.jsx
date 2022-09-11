@@ -1,15 +1,16 @@
-import { Box, VStack, Text, Spinner, Container } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useState } from "react";
-import bahiaBlanca from '../assets/image/bahia-blanca.jpeg';
+import {
+  Box, Flex, HStack,
+  Image, Spinner, Text, VStack, Stack,
+  useMediaQuery
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import sunnyDay from "../assets/images/sunny-day.png";
 
 const Card = () => {
   const API_Key = "5431adfd8102483dbcc5b0d4649f6348";
   const [weatherData, setWeatherData] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [successFetch, setSuccessFetch] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
   const [isFetching, setIsFetching] = useState(true);
+  const [isLargerThan1280] = useMediaQuery(['(min-width: 1280px)']) 
 
   const getWwatherData = () => {
     try {
@@ -25,7 +26,7 @@ const Card = () => {
           .then((weatherData) => {
             setWeatherData(weatherData);
           })
-          .finally(() => setLoading(false));
+          .finally(() => setIsFetching(false));
       });
     } catch (e) {
       // If an error occurs we catch it and display it by console
@@ -41,50 +42,40 @@ const Card = () => {
   return (
     <Box
       padding={14}
-      bgColor="gray.50"
-      boxShadow=''
+      bgColor="blackAlpha.600"
       borderRadius="md"
-      marginTop={10}
+      backdropFilter="auto"
+      backdropBlur="5px"
+      boxShadow="dark-lg"
       height="400px"
-      bgImage={ weatherData ? bahiaBlanca : undefined}
-      bgSize='cover'
-      bgPosition='center'
+      w="100%"
     >
-      {loading ? (
-        <Container
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          h="100%"
+      {isFetching ? (
+        <Flex align='center' justify='center' height='100%' w='100%'
         >
           <Spinner
             label="Loading..."
             size="xl"
             speed="0.6s"
             thickness="4px"
-            emptyColor="gray.200"
-            color="yellow.400"
+            emptyColor="gray.300"
+            color='telegram.500'
           />
-        </Container>
-      ) : !successFetch ? (
-        <VStack justify="center">
-          <Text fontWeight="semibold" as="h5">
-            Sorry !, we have a error during the fetching of your city
-          </Text>
-          <VStack>
-            <Text>Error Detail:</Text>
-            <Text fontWeight="ligth">{errorMessage}</Text>
-          </VStack>
-        </VStack>
+        </Flex>
       ) : (
         <VStack alignItems="start">
-          <Text>{console.log(weatherData)}</Text>
-          <Text as="h5" fontSize={22} fontWeight="semibold" color='whiteAlpha.900'>
-            {weatherData.name}
-          </Text>
-          <Text color='whiteAlpha.900' fontWeight='semibold' textTransform='capitalize'>{weatherData.weather[0].description}</Text>
+          <Stack justify="space-between" alignItems='center' direction={isLargerThan1280 ? 'row' : 'column'} w="100%">
+            <Box>
+              <Text fontSize="4xl" color="whitesmoke" fontWeight="bold">
+                {weatherData.name}
+              </Text>
+              <Text color='whitesmoke'>{weatherData.weather[0].description}</Text>
+            </Box>
+            <HStack spacing={6}>
+              <Text color='whitesmoke' fontWeight='semibold' fontSize='5xl'>{weatherData.main.temp} °C</Text>
+              <Image src={sunnyDay} alt="sunny day" boxSize={20} />
+            </HStack>
+          </Stack>
         </VStack>
       )}
     </Box>

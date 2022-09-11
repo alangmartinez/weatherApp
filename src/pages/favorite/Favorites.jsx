@@ -13,7 +13,9 @@ const Favorites = () => {
           maxW="400px"
           centerContent
           padding={6}
-          bgColor="gray.100"
+          backdropFilter='auto'
+          backdropBlur='5px'
+          bgColor="whiteAlpha.700"
           borderRadius="lg"
           boxShadow="lg"
         >

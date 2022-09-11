@@ -38,7 +38,7 @@ export default function MobileNavBar() {
   ];
 
   return (
-    <Box paddingY={4} paddingX={4}>
+    <Box>
       <Icon
         as={HiMenu}
         boxSize={9}
@@ -50,9 +50,11 @@ export default function MobileNavBar() {
         <DrawerOverlay />
         <DrawerContent
           boxShadow="lg"
-          bgColor="black"
+          bgColor="blackAlpha.700"
           transition="ease"
           fontFamily="drawer"
+          backdropFilter="auto"
+          backdropBlur="7px"
         >
           <DrawerCloseButton
             onClick={onClose}
@@ -71,16 +73,23 @@ export default function MobileNavBar() {
               align="start"
               divider={<StackDivider borderColor="whiteAlpha.900" w="20%" />}
             >
-              {
-                pages.map( page => 
+              {pages.map((page) => (
                 <Link key={page.name} to={page.path} onClick={onClose}>
-                  <Text cursor='pointer'>{page.name}</Text>
-                </Link>)
-              }
+                  <Text cursor="pointer">{page.name}</Text>
+                </Link>
+              ))}
             </VStack>
           </DrawerBody>
-          <DrawerFooter alignSelf='center'>
-            <Button colorScheme='orange' fontWeight='thin' fontSize='md' size='lg' boxShadow='xl'>Sign Out</Button>
+          <DrawerFooter alignSelf="center">
+            <Button
+              colorScheme="telegram"
+              fontWeight="thin"
+              fontSize="md"
+              size="lg"
+              boxShadow="xl"
+            >
+              Sign Out
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
