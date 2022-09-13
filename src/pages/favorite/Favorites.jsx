@@ -15,7 +15,7 @@ const Favorites = () => {
           padding={6}
           backdropFilter='auto'
           backdropBlur='5px'
-          bgColor="whiteAlpha.700"
+          bgColor="gray.50"
           borderRadius="lg"
           boxShadow="lg"
         >

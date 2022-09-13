@@ -1,16 +1,25 @@
 import {
-  Box, Flex, HStack,
-  Image, Spinner, Text, VStack, Stack,
-  useMediaQuery
+  Box,
+  Flex,
+  Heading,
+  HStack,
+  Icon,
+  Spinner, Text,
+  theme,
+  useMediaQuery,
+  VStack
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import sunnyDay from "../assets/images/sunny-day.png";
+import { AiFillStar } from "react-icons/ai";
+import { BsStar } from "react-icons/bs";
+import Details from "./Details";
 
 const Card = () => {
-  const API_Key = "5431adfd8102483dbcc5b0d4649f6348";
+  const API_Key = "2d2fa75c38f927368a5b7f44ea7c961f";
   const [weatherData, setWeatherData] = useState({});
   const [isFetching, setIsFetching] = useState(true);
-  const [isLargerThan1280] = useMediaQuery(['(min-width: 1280px)']) 
+  const [isLargerThan1280] = useMediaQuery(["(min-width: 1280px)"]);
+  const [favorite, setFavorite] = useState(false);
 
   const getWwatherData = () => {
     try {
@@ -30,7 +39,6 @@ const Card = () => {
       });
     } catch (e) {
       // If an error occurs we catch it and display it by console
-      setSuccessFetch(false);
       setErrorMessage(e.message);
     }
   };
@@ -38,6 +46,12 @@ const Card = () => {
   useEffect(() => {
     getWwatherData();
   }, []);
+
+  const addFavorite = () => {
+    setFavorite(!favorite);
+  };
+
+  console.log(theme);
 
   return (
     <Box
@@ -51,31 +65,56 @@ const Card = () => {
       w="100%"
     >
       {isFetching ? (
-        <Flex align='center' justify='center' height='100%' w='100%'
-        >
+        <Flex align="center" justify="center" height="100%" w="100%">
           <Spinner
             label="Loading..."
             size="xl"
             speed="0.6s"
             thickness="4px"
             emptyColor="gray.300"
-            color='telegram.500'
+            color="telegram.500"
           />
         </Flex>
       ) : (
-        <VStack alignItems="start">
-          <Stack justify="space-between" alignItems='center' direction={isLargerThan1280 ? 'row' : 'column'} w="100%">
-            <Box>
-              <Text fontSize="4xl" color="whitesmoke" fontWeight="bold">
-                {weatherData.name}
-              </Text>
-              <Text color='whitesmoke'>{weatherData.weather[0].description}</Text>
-            </Box>
-            <HStack spacing={6}>
-              <Text color='whitesmoke' fontWeight='semibold' fontSize='5xl'>{weatherData.main.temp} °C</Text>
-              <Image src={sunnyDay} alt="sunny day" boxSize={20} />
-            </HStack>
-          </Stack>
+        <VStack
+          alignItems="start"
+          justify="space-between"
+          h="100%"
+          color="whiteAlpha.900"
+        >
+            <VStack>
+              <HStack>
+                <Box>
+                  <Heading fontSize="3xl" fontWeight="bold">
+                    {weatherData.name}, {weatherData.sys.country}
+                  </Heading>
+                  <Text fontWeight="bold" fontSize="6xl">
+                    {weatherData.main.temp} °C
+                  </Text>
+                  <Text fontSize="sm" fontWeight="light">
+                    Feels Like: {weatherData.main.feels_like} °C
+                  </Text>
+                </Box>
+                <Text>{weatherData.weather.description}</Text>
+              </HStack>
+            </VStack>
+            <Icon
+              as={favorite ? AiFillStar : BsStar}
+              color={favorite ? "yellow.500" : "whiteAlpha.900"}
+              boxSize={favorite ? 7 : 6}
+              cursor="pointer"
+              onClick={addFavorite}
+              dropShadow="md"
+              position="absolute"
+              top={12}
+              right={12}
+            />
+          <Details
+            tempMin={weatherData.main.temp_min}
+            tempMax={weatherData.main.temp_max}
+            humidity={weatherData.main.humidity}
+            windSpeed={weatherData.wind.speed}
+          />
         </VStack>
       )}
     </Box>

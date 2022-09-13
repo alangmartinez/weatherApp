@@ -1,18 +1,19 @@
 import { HStack, Input, StackDivider, Icon } from "@chakra-ui/react";
+import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 
 const Search = () => {
+  const [location, setLocation] = useState("");
+
   return (
     <HStack
-      bgColor="whiteAlpha.600"
-      backdropFilter='auto'
-      backdropBlur='5px'
-      divider={<StackDivider />}
+      bgColor="gray.50"
+      divider={<StackDivider borderColor="gray.400" />}
       padding={3}
       paddingX={5}
       boxShadow="xl"
       maxW="600px"
-      w='100%'
+      w="100%"
       m="auto"
       borderRadius="md"
       spacing={4}
@@ -24,7 +25,10 @@ const Search = () => {
         placeholder="Enter your country or city here..."
         autoFocus
         fontSize="xl"
-        _placeholder={{ color: 'blacAlpha.900'}}
+        value={location}
+        onChange={(event) => setLocation(event.target.value)}
+        onKeyDown={searchLocation}
+        _placeholder={{ color: "blacAlpha.900" }}
       />
       <Icon cursor="pointer" as={BsSearch} w={5} h={5} />
     </HStack>

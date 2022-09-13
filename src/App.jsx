@@ -8,24 +8,29 @@ import HomePage from "./pages/HomePage";
 function App() {
   return (
     <>
-        <Header />
-        <Container maxW="container.md" width='100%' marginY={12}>
-          <Routes>
-            <Route path="/" element={<HomePage />}></Route>
-            <Route path="favorites" element={<Favorites />}></Route>
-            <Route path="help" element={<Help />}></Route>
-            <Route
-              path="*"
-              element={
-                <Container centerContent>
-                  <Text as="h1" textAlign="center" fontSize="xl" fontWeight='semibold'>
-                    404 Nothing Found
-                  </Text>
-                </Container>
-              }
-            ></Route>
-          </Routes>
-        </Container>
+      <Header />
+      <Container maxW="container.md" width="100%" marginY={12}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="favorites" element={<Favorites />} />
+          <Route path="help" element={<Help />} />
+          <Route
+            path="*"
+            element={
+              <Container centerContent>
+                <Text
+                  as="h1"
+                  textAlign="center"
+                  fontSize="xl"
+                  fontWeight="semibold"
+                >
+                  404 Nothing Found
+                </Text>
+              </Container>
+            }
+          />
+        </Routes>
+      </Container>
     </>
   );
 }

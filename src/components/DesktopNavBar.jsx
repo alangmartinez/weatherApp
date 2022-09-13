@@ -1,12 +1,11 @@
 import {
-  HStack,
-  Button,
-  Text,
+  Button, HStack, Text
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function DesktopNavBar() {
+
   return (
     <>
       <HStack spacing={9}>
@@ -40,7 +39,7 @@ export default function DesktopNavBar() {
         <Button variant="unstyled">Sign In</Button>
         <Button
           variant="solid"
-          boxShadow="sm"
+          boxShadow='sm'
           bgColor="#23A6F0"
           color="whitesmoke"
           size="lg"
