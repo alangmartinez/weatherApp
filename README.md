@@ -12,3 +12,9 @@ I hope you find this web application useful.
 In this web application I made use of the weather API, OpenWeatherMap.
 
 To know more about this API, you can visit the following link: https://openweathermap.org/api 
+
+
+Contact:
+
+E-mail: alannmartinezz@icloud.com
+Linkedin: https://www.linkedin.com/in/alan-martinez-000a7a188/
