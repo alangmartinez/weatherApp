@@ -1,5 +1,5 @@
-import { Box, Container } from '@chakra-ui/react';
-import Form from '../components/HelpForm';
+import { Container } from '@chakra-ui/react';
+import Form from '../components/Form';
 
 const Help = () => {
     return(

@@ -1,10 +1,15 @@
-import { HStack, VStack, Text, StackDivider } from "@chakra-ui/react";
+import { Stack, VStack, Text, StackDivider, useMediaQuery } from "@chakra-ui/react";
 
 export default function Details({ tempMax, tempMin, windSpeed, humidity }) {
+  const [desktop] = useMediaQuery(['(min-width: 1280px)'])
+
   return (
-    <HStack
+    <Stack
+    direction={desktop ? 'row' : 'column'}
+    align='center'
+    justify='center'
       divider={
-        <StackDivider h="70%" alignSelf="center" borderColor="gray.400" />
+        <StackDivider h="70%" alignSelf="center" borderColor="gray.300" />
       }
       spacing={7}
     >
@@ -32,6 +37,6 @@ export default function Details({ tempMax, tempMin, windSpeed, humidity }) {
         </Text>
         <Text fontSize="sm">Wind Speed</Text>
       </VStack>
-    </HStack>
+    </Stack>
   );
 }

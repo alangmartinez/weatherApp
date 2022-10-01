@@ -8,7 +8,7 @@ const Header = () => {
   const [sticky, setSticky] = useState("false");
 
   window.addEventListener("scroll", () => {
-    scrollY <= 50 ? setSticky(false) : setSticky(true);
+    scrollY >= 50 ? setSticky(true) : setSticky(false);
   });
 
   return (

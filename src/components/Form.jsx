@@ -1,70 +1,14 @@
 import {
-  Button,
+  Box, Button,
   Divider,
-  FormControl,
-  FormHelperText,
-  FormErrorMessage,
-  FormLabel,
+  FormControl, FormErrorMessage, FormHelperText, FormLabel,
   Input,
-  InputGroup,
-  Box,
-  InputLeftElement,
-  Textarea,
-  Text,
-  VStack,
-  HStack,
-  useToast,
-  Icon,
-  InputRightElement,
-  Tooltip,
+  InputGroup, InputLeftElement, InputRightElement, Text, Textarea, Tooltip, useToast, VStack
 } from "@chakra-ui/react";
-import { FaCheckCircle, FaInfo, FaPhone } from "react-icons/fa";
-import { FaMailBulk } from "react-icons/fa";
+import { Form, Formik } from "formik";
+import { FaCheckCircle, FaInfo, FaMailBulk, FaPhone } from "react-icons/fa";
 import { TbSend } from "react-icons/tb";
-import { Formik, Form } from "formik";
-
-// We create this funciton with the purpose of validate each field in the form
-const validate = (values) => {
-  // We create an object named errors
-  const errors = {};
-
-  // Name validation
-  if (!values.name) {
-    errors.name = "Please enter a name.";
-  } else if (values.name.length < 3 || values.name.length > 10) {
-    errors.name = "Name must be between 4-10 characters long.";
-  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
-    errors.name = "Name can only contain letters and spaces.";
-  }
-
-  // Surname validation
-  if (!values.surname) {
-    errors.surname = "Please enter a surname";
-  } else if (values.surname.length < 4 || values.surname.length > 10) {
-    errors.surname = "Surame must be between 4-10 characters long.";
-  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.surname)) {
-    errors.surname = "Surname can only contain letters and spaces.";
-  }
-
-  // E-mail validation
-  if (!values.email) {
-    errors.email = "Please enter an e-mail.";
-  } else if (
-    !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)
-  ) {
-    errors.email = "Please enter a valid e-mail account.";
-  }
-
-  //Telephone validation
-  if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.tel)) {
-    errors.tel = "Phone number can only contain numbers.";
-  } else if (values.tel.length > 14) {
-    errors.tel = "Phone number must have more than 14 numbers.";
-  }
-
-  // We return the object with it's new props inside it
-  return errors;
-};
+import { useFormValidation } from "../hooks/useFormValidation";
 
 const HelpForm = ({ variant }) => {
   const toast = useToast();
@@ -78,7 +22,7 @@ const HelpForm = ({ variant }) => {
         tel: "",
         message: "",
       }}
-      validate={validate}
+      validate={() => useFormValidation({values})}
       onSubmit={(values, { resetForm }) => {
         resetForm();
         toast({
@@ -93,7 +37,7 @@ const HelpForm = ({ variant }) => {
     >
       {({ handleChange, handleBlur, touched, values, errors }) => (
         <Form>
-          <VStack spacing={8}>
+          <VStack spacing={8} color="blackAlpha.900">
             <FormControl isRequired isInvalid={touched.name && errors.name}>
               <Tooltip
                 placement="left"
@@ -104,16 +48,16 @@ const HelpForm = ({ variant }) => {
                 boxShadow="md"
                 label="Is a required field"
                 marginRight={1}
-                aria-label='Is a required field'
+                aria-label="Is a required field"
               >
                 <FormLabel>Name:</FormLabel>
               </Tooltip>
               <InputGroup>
                 <InputLeftElement children={<FaInfo />}></InputLeftElement>
                 <Input
+                  color="blackAlpha.900"
                   variant={variant}
                   placeholder="Name..."
-                  focusBorderColor="yellow.400"
                   name="name"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -145,16 +89,15 @@ const HelpForm = ({ variant }) => {
                 boxShadow="md"
                 label="Is a required field"
                 marginRight={1}
-                aria-label='Is a required field'
+                aria-label="Is a required field"
               >
-                <FormLabel>Last Name:</FormLabel>
+                <FormLabel>Surname:</FormLabel>
               </Tooltip>
               <InputGroup>
                 <InputLeftElement children={<FaInfo />}></InputLeftElement>
                 <Input
                   variant={variant}
                   placeholder="Surname..."
-                  focusBorderColor="yellow.400"
                   name="surname"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -186,7 +129,7 @@ const HelpForm = ({ variant }) => {
                 boxShadow="md"
                 label="Is a required field"
                 marginRight={1}
-                aria-label='Is a required field'
+                aria-label="Is a required field"
               >
                 <FormLabel>E-mail:</FormLabel>
               </Tooltip>
@@ -196,7 +139,6 @@ const HelpForm = ({ variant }) => {
                   type="email"
                   variant={variant}
                   placeholder="E-mail..."
-                  focusBorderColor="yellow.400"
                   name="email"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -260,7 +202,6 @@ const HelpForm = ({ variant }) => {
             <Textarea
               paddingX={5}
               paddingY={3}
-              focusBorderColor="yellow.400"
               placeholder="Type your message here..."
               fontWeight="light"
               onChange={handleChange}
@@ -272,7 +213,7 @@ const HelpForm = ({ variant }) => {
 
             <Button
               variant="solid"
-              colorScheme="yellow"
+              colorScheme='telegram'
               boxShadow="sm"
               leftIcon={<TbSend />}
               type="submit"

@@ -19,7 +19,7 @@ const Favorites = () => {
           borderRadius="lg"
           boxShadow="lg"
         >
-          <Text as="h2" fontWeight="bold">
+          <Text as="h2" fontWeight="bold" color='blackAlpha.900'>
             You don't have any favorite yet.
           </Text>
         </Container>

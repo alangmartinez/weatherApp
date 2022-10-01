@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Favorites from "./pages/favorite/Favorites";
 import Help from "./pages/Help";
 import HomePage from "./pages/HomePage";
+import Footer from './components/Footer'
+import './app.css'
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
           />
         </Routes>
       </Container>
+      <Footer />
     </>
   );
 }
