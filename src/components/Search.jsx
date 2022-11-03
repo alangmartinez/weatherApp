@@ -1,9 +1,17 @@
 import { HStack, Icon, Input, StackDivider } from "@chakra-ui/react";
 import { useState } from "react";
+import { useContext, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
+import { weatherContext } from '../context/weatherContext';
 
 const Search = () => {
-  const [location, setLocation] = useState("");
+  const [city, setCity] = useState('');
+  const {weatherData, getWeatherData} = useContext(weatherContext)
+
+  useEffect(() => {
+    getWeatherData(city)
+    console.log(weatherData);
+  },[city])
 
   return (
     <HStack
@@ -24,11 +32,11 @@ const Search = () => {
         variant="unstyled"
         bgColor="transparent"
         placeholder="Enter your country or city here..."
-        _placeholder={{ color: "blackAlpha.900", fontSize: "md" }}
+        _placeholder={{ color: "blackAlpha.900", fontSize: "lg", paddingLeft: 1 }}
         autoFocus
-        fontSize="xl"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
+        fontSize='lg'
+        value={city}
+        onChange={(e) => setCity(e.target.value.toLocaleLowerCase())}
         color="blackAlpha.900"
       />
       <Icon cursor="pointer" as={BsSearch} w={5} h={5} />

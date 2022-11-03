@@ -3,12 +3,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import theme from './styles/theme';
+import theme from "./theme/index";
+import WeatherProvider from "./context/weatherContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <ChakraProvider resetCSS theme={theme}>
-      <BrowserRouter>
-          <App />
-      </BrowserRouter>
-    </ChakraProvider>
+  <ChakraProvider resetCSS theme={theme}>
+    <BrowserRouter>
+      <WeatherProvider>
+        <App />
+      </WeatherProvider>
+    </BrowserRouter>
+  </ChakraProvider>
 );

@@ -1,45 +1,48 @@
-import { Box, HStack, Text, VStack } from "@chakra-ui/react";
+import { Divider, Stack, Text, VStack, Icon, HStack } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import SocialMedia from "./SocialMedia";
 
-const Footer = () => {
-  const menu = ["Home", "About us", "Favorites", "Help"];
+import { BiCopyright } from "react-icons/bi";
 
+const Footer = () => {
   return (
-    <Box
-      bgColor="blackAlpha.700"
-      backdropFilter="auto"
-      backdropBlur="4px"
-      position="absolute"
-      bottom={0}
-      left={0}
-      w="full"
-      paddingX={20}
-      paddingY={10}
-      zIndex={0}
-    >
-      <HStack justify='space-between' align='start'>
-        <VStack spacing={3} color="white" fontWeight="semibold" align="start">
-          {menu.map((item, index) => {
-            return <Text key={index}>{item}</Text>;
-          })}
-        </VStack>
-        <SocialMedia />
-      </HStack>
-      <VStack spacing={0} justify="center">
-        <Text
-          textAlign="center"
-          fontWeight="light"
-          _after={{
-            content: `' Alan Martinez'`,
-            color: "yellow.400",
-            fontWeight: "semibold",
-          }}
+    <VStack spacing={10} pb={10} w="full">
+      <Divider borderColor="whiteAlpha.900" />
+      <Stack
+        spacing={{ base: 12 }}
+        direction={{ base: "column", md: "row" }}
+        justify={{ base: "center", md: "space-between" }}
+        alignItems="center"
+        w="full"
+        paddingX={6}
+      >
+        <VStack
+          align={{ base: "center", md: "start" }}
+          fontSize={19}
+          spacing={2}
         >
-          Designed by
+          <Link to="/">
+            <Text>Home</Text>
+          </Link>
+          <Link to="/about-us">
+            <Text>About Us</Text>
+          </Link>
+          <Link to="/favorites">
+            <Text>Favorites</Text>
+          </Link>
+          <Link to="/help">
+            <Text>Help</Text>
+          </Link>
+        </VStack>
+        <SocialMedia boxSize={8} />
+      </Stack>
+      <HStack>
+        <Icon as={BiCopyright} />
+        <Text _before={{ content: "'2022 '", color: "telegram.500" }}>
+          Developed by Alan Martinez
         </Text>
-        <Text>All Rigths Reserverd</Text>
-      </VStack>
-    </Box>
+      </HStack>
+    </VStack>
   );
 };
 

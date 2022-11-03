@@ -1,18 +1,38 @@
 import {
   Heading,
-  HStack,
-  Icon, Text,
+  HStack, Image,
+  Text,
   VStack
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { AiFillStar } from "react-icons/ai";
-import { BsStar } from "react-icons/bs";
+import Clouds from "../../public/images/icons/clouds.png";
 import Details from "./Details";
 
-const Card = ({ weatherData }) => {
-  const [favorite, setFavorite] = useState(false);
-  const date = new Date;
+const Card = ({weatherData}) => {
+  const icons = [
+    {
+      name: "clouds",
+      icon: Clouds,
+    },
+  ];
 
+  const backgrounds = [
+    {
+      weather: "Clouds",
+      urlImage: "/images/cloudy.jpg",
+    },
+    {
+      weather: "Sunny",
+      urlImage: '/images/sunny.jpg'
+    }
+  ];
+
+  const weathersBackground = (typeWeather) => {
+    const background = backgrounds.find(
+      (background) => background?.weather === typeWeather
+    );
+
+    return background?.urlImage;
+  };
 
   return (
     <VStack
@@ -21,9 +41,13 @@ const Card = ({ weatherData }) => {
       h="100%"
       color="whiteAlpha.900"
       w="full"
+      backgroundImage={weathersBackground(weatherData.weather[0].main)}
+      backgroundSize='cover'
+      p={14}
+      borderRadius='md'
     >
       <HStack justify="space-between" w="full">
-        <VStack spacing="4px" align="start" flex={0.8}>
+        <VStack spacing="4px" align="start">
           <Heading fontSize="3xl" fontWeight="bold">
             {weatherData.name}, {weatherData.sys.country}
           </Heading>
@@ -34,21 +58,12 @@ const Card = ({ weatherData }) => {
             Feels Like: {weatherData.main.feels_like} °C
           </Text>
         </VStack>
-        <VStack flex={1} justify="space-between">
+        <VStack justify="space-between">
+          <Image src={Clouds} boxSize="130px" />
           <Text fontWeight="semibold">{weatherData.weather[0].main}</Text>
         </VStack>
       </HStack>
-      <Icon
-        as={favorite ? AiFillStar : BsStar}
-        color={favorite ? "yellow.500" : "whiteAlpha.900"}
-        boxSize={favorite ? 7 : 6}
-        cursor="pointer"
-        onClick={() => setFavorite(!favorite)}
-        dropShadow="md"
-        position="absolute"
-        top={12}
-        right={12}
-      />
+
       <Details
         tempMin={weatherData.main.temp_min}
         tempMax={weatherData.main.temp_max}

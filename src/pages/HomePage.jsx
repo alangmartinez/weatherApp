@@ -1,6 +1,7 @@
 import Search from "../components/Search";
 import Card from "../components/Card";
-import { VStack, Stack, Spinner } from "@chakra-ui/react";
+import GridComponent from '../components/GridComponent';
+import { VStack, Box, Spinner } from "@chakra-ui/react";
 import { useWeatherData } from "../hooks/useWeatherData";
 
 const HomePage = () => {
@@ -9,16 +10,9 @@ const HomePage = () => {
   return (
     <VStack w="100%" spacing={20} marginTop={14}>
       <Search />
-      <Stack
-        justify="center"
-        align="center"
+      <Box
         h="450px"
         w="full"
-        padding={14}
-        bgColor="blackAlpha.600"
-        borderRadius="md"
-        backdropFilter="auto"
-        backdropBlur="5px"
         boxShadow="dark-lg"
       >
         {isFetching ? (
@@ -33,7 +27,8 @@ const HomePage = () => {
         ) : (
           <Card weatherData={weatherData} />
         )}
-      </Stack>
+      </Box>
+      <GridComponent/>
     </VStack>
   );
 };

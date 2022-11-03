@@ -1,11 +1,11 @@
-import {
-  Button, HStack, Text
-} from "@chakra-ui/react";
-import { FaArrowRight } from "react-icons/fa";
+import { Button, HStack, IconButton, Text, theme } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-export default function DesktopNavBar() {
+import { FaArrowRight } from "react-icons/fa";
+import { IoMoon } from "react-icons/io5";
+import { IoHome } from "react-icons/io5";
 
+export default function DesktopNavBar() {
   return (
     <>
       <HStack spacing={9}>
@@ -14,32 +14,27 @@ export default function DesktopNavBar() {
         </Text>
         <HStack spacing={12} paddingY={3} fontWeight="bold" paddingX={6}>
           <Link to="/">
-            <Text cursor="pointer" paddingY={3}>
+            <Button variant="ghost">
               Home
-            </Text>
+            </Button>
           </Link>
           <Link to="/about-us">
-            <Text cursor="pointer" paddingY={3}>
-              About Us
-            </Text>
+            <Button variant="ghost">About Us</Button>
           </Link>
           <Link to="/favorites">
-            <Text cursor="pointer" paddingY={3}>
-              Favorites
-            </Text>
+            <Button variant="ghost">Favorites</Button>
           </Link>
           <Link to="/help">
-            <Text cursor="pointer" paddingY={3}>
-              Help
-            </Text>
+            <Button variant="ghost">Help</Button>
           </Link>
+          <IconButton icon={IoMoon} />
         </HStack>
       </HStack>
       <HStack spacing={7}>
         <Button variant="unstyled">Sign In</Button>
         <Button
           variant="solid"
-          boxShadow='sm'
+          boxShadow="sm"
           bgColor="#23A6F0"
           color="whitesmoke"
           size="lg"
