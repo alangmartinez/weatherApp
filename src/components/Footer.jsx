@@ -20,6 +20,7 @@ const Footer = () => {
           align={{ base: "center", md: "start" }}
           fontSize={19}
           spacing={2}
+          color='whiteAlpha.900'
         >
           <Link to="/">
             <Text>Home</Text>
@@ -34,7 +35,7 @@ const Footer = () => {
             <Text>Help</Text>
           </Link>
         </VStack>
-        <SocialMedia boxSize={8} />
+        <SocialMedia boxSize={10} color='white' />
       </Stack>
       <HStack>
         <Icon as={BiCopyright} />

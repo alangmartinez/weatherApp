@@ -1,22 +1,48 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const weatherContext = createContext({});
 
 const WeatherProvider = ({ children }) => {
-  const APIkey = "d59bf087464896739f255d2ed8191ee3";
+  // Make a call to the API and get the data
+  // https://openweathermap.org/api/one-call-api
+  // set the data to the state
+  // pass the data to the components
+  // use the data to display the weather info
+  
+  const APIKey = "d59bf087464896739f255d2ed8191ee3";
   const [weatherData, setWeatherData] = useState({});
+  const [search, setSearch] = useState("");
+  const [isFetching, setIsFetching] = useState(true);
 
-  function getWeatherData({ city }) {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`
-    )
-      .then((res) => res.json())
-      .then((data) => setWeatherData(data))
-      .catch((error) => console.log(error));
-  }
+  const fetchWeather = (search, APIKey) => {
+    if (search !== "") {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${APIKey}&units=metric`
+      )
+        .then((res) => res.json())
+        .then((data) => setWeatherData(data))
+        .catch((err) => console.log(err))
+        .finally(() => setIsFetching(false));
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIKey}&units=metric`
+        )
+          .then((res) => res.json())
+          .then((data) => setWeatherData(data))
+          .catch((err) => console.log(err))
+          .finally(() => setIsFetching(false));
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchWeather(search, APIKey);
+  }, [search]);
 
   return (
-    <weatherContext.Provider value={{ weatherData, getWeatherData }}>
+    <weatherContext.Provider value={{ weatherData, setSearch, isFetching }}>
       {children}
     </weatherContext.Provider>
   );

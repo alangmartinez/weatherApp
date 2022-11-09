@@ -1,29 +1,13 @@
-import {
-  Heading,
-  HStack, Image,
-  Text,
-  VStack
-} from "@chakra-ui/react";
+import { Heading, Image, Text, VStack } from "@chakra-ui/react";
 import Clouds from "../../public/images/icons/clouds.png";
-import Details from "./Details";
+import { backgrounds } from "../backgrounds";
 
-const Card = ({weatherData}) => {
+const Card = ({ weatherData }) => {
   const icons = [
     {
       name: "clouds",
       icon: Clouds,
     },
-  ];
-
-  const backgrounds = [
-    {
-      weather: "Clouds",
-      urlImage: "/images/cloudy.jpg",
-    },
-    {
-      weather: "Sunny",
-      urlImage: '/images/sunny.jpg'
-    }
   ];
 
   const weathersBackground = (typeWeather) => {
@@ -40,13 +24,13 @@ const Card = ({weatherData}) => {
       justify="space-between"
       h="100%"
       color="whiteAlpha.900"
-      w="full"
       backgroundImage={weathersBackground(weatherData.weather[0].main)}
-      backgroundSize='cover'
+      backgroundSize='contain'
+      backgroundRepeat="no-repeat"
       p={14}
-      borderRadius='md'
+      borderRadius="md"
     >
-      <HStack justify="space-between" w="full">
+      <VStack align="start" justify="center">
         <VStack spacing="4px" align="start">
           <Heading fontSize="3xl" fontWeight="bold">
             {weatherData.name}, {weatherData.sys.country}
@@ -62,14 +46,7 @@ const Card = ({weatherData}) => {
           <Image src={Clouds} boxSize="130px" />
           <Text fontWeight="semibold">{weatherData.weather[0].main}</Text>
         </VStack>
-      </HStack>
-
-      <Details
-        tempMin={weatherData.main.temp_min}
-        tempMax={weatherData.main.temp_max}
-        humidity={weatherData.main.humidity}
-        windSpeed={weatherData.wind.speed}
-      />
+      </VStack>
     </VStack>
   );
 };
