@@ -2,9 +2,7 @@ import { extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
     fonts: {
-        heading: "Cal Sans",
-        drawer: "'Karla', sans-serif",
-        body: "'Montserrat', sans-serif",
+        body: 'Poppins, sans-serif'
     },
     config: {
         initialColorMode: 'light',

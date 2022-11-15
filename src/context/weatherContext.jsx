@@ -1,4 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import React, {
+  createContext, useState
+} from "react";
 
 export const weatherContext = createContext({});
 
@@ -8,13 +10,12 @@ const WeatherProvider = ({ children }) => {
   // set the data to the state
   // pass the data to the components
   // use the data to display the weather info
-  
+
   const APIKey = "d59bf087464896739f255d2ed8191ee3";
   const [weatherData, setWeatherData] = useState({});
-  const [search, setSearch] = useState("");
   const [isFetching, setIsFetching] = useState(true);
 
-  const fetchWeather = (search, APIKey) => {
+  const fetchWeather = ({search}) => {
     if (search !== "") {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${APIKey}&units=metric`
@@ -37,12 +38,9 @@ const WeatherProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    fetchWeather(search, APIKey);
-  }, [search]);
 
   return (
-    <weatherContext.Provider value={{ weatherData, setSearch, isFetching }}>
+    <weatherContext.Provider value={{ weatherData, fetchWeather, isFetching }}>
       {children}
     </weatherContext.Provider>
   );

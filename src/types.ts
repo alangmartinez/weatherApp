@@ -1,4 +1,4 @@
-export type Weather = {
+export type WeatherData = {
     weather: {
         id: number,
         main: string,

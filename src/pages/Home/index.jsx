@@ -1,9 +1,9 @@
-import Search from "../components/Search";
-import Card from "../components/Card";
-import GridComponent from '../components/GridComponent';
+import Search from "../../components/Search";
+import Card from "../../components/Card";
+import GridComponent from '../../components/GridComponent';
 import { VStack, Box, Spinner } from "@chakra-ui/react";
 import { useContext } from "react";
-import { weatherContext } from "../context/weatherContext";
+import { weatherContext } from "../../context/weatherContext";
 
 const HomePage = () => {
   const { weatherData, isFetching } = useContext(weatherContext);

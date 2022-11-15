@@ -10,5 +10,9 @@ export const backgrounds = [
     {
       weather: 'Clear',
       urlImage: '/images/clear.jpg'
+    },
+    {
+      weather: 'Rain',
+      urlImage: '/images/rain.jpg'
     }
   ];

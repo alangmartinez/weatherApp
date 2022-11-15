@@ -1,9 +1,8 @@
-import { Button, HStack, IconButton, Text, theme } from "@chakra-ui/react";
+import { Button, HStack, IconButton, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { FaArrowRight } from "react-icons/fa";
 import { IoMoon } from "react-icons/io5";
-import { IoHome } from "react-icons/io5";
 
 export default function DesktopNavBar() {
   return (
@@ -12,36 +11,39 @@ export default function DesktopNavBar() {
         <Text fontWeight="bold" fontSize="3xl">
           Weather App
         </Text>
-        <HStack spacing={12} paddingY={3} fontWeight="bold" paddingX={6}>
+        <HStack spacing={12} paddingY={3} fontWeight="semibold" paddingX={6}>
           <Link to="/">
-            <Button variant="ghost">
+            <Button variant="ghost" fontSize={18}>
               Home
             </Button>
           </Link>
           <Link to="/about-us">
-            <Button variant="ghost">About Us</Button>
+            <Button variant="ghost" fontSize={18}>
+              About Us
+            </Button>
           </Link>
           <Link to="/favorites">
-            <Button variant="ghost">Favorites</Button>
+            <Button variant="ghost" fontSize={18}>
+              Favorites
+            </Button>
           </Link>
           <Link to="/help">
-            <Button variant="ghost">Help</Button>
+            <Button variant="ghost" fontSize={18}>
+              Help
+            </Button>
           </Link>
-          <IconButton icon={IoMoon} />
+          <IconButton icon={<IoMoon />} />
         </HStack>
       </HStack>
-      <HStack spacing={7}>
-        <Button variant="unstyled">Sign In</Button>
+      <HStack spacing={8}>
+        <Button variant="unstyled">Log In</Button>
         <Button
-          variant="solid"
-          boxShadow="sm"
-          bgColor="#23A6F0"
-          color="whitesmoke"
+          boxShadow="md"
+          colorScheme="facebook"
           size="lg"
-          borderRadius="sm"
           rightIcon={<FaArrowRight />}
         >
-          Register
+          Sign Up
         </Button>
       </HStack>
     </>

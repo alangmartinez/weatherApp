@@ -1,15 +1,16 @@
 import { HStack, Icon, Input, StackDivider } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import * as React from "react";
+import { useContext, useRef } from "react";
 import { BsSearch } from "react-icons/bs";
-import { useContext } from "react";
 import { weatherContext } from "../context/weatherContext";
 
 const Search = () => {
-  const { setSearch } = useContext(weatherContext);
+  const { weatherData, fetchWeather } = useContext(weatherContext);
   const inputRef = useRef();
 
   const handleSearch = () => {
-    setSearch(inputRef.current.value);
+    fetchWeather(inputRef.current.value);
+    console.log(weatherData);
   };
 
   return (
