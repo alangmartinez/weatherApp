@@ -1,4 +1,4 @@
-import { Divider, Stack, Text, VStack, Icon, HStack } from "@chakra-ui/react";
+import { Divider, Stack, Text, VStack, Icon, HStack, StackDivider } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import SocialMedia from "./SocialMedia";
 
@@ -20,7 +20,7 @@ const Footer = () => {
           align={{ base: "center", md: "start" }}
           fontSize={19}
           spacing={2}
-          color='whiteAlpha.900'
+          color="whiteAlpha.900"
         >
           <Link to="/">
             <Text>Home</Text>
@@ -35,13 +35,14 @@ const Footer = () => {
             <Text>Help</Text>
           </Link>
         </VStack>
-        <SocialMedia boxSize={10} color='white' />
+        <SocialMedia boxSize={10} color="white" />
       </Stack>
-      <HStack>
-        <Icon as={BiCopyright} />
-        <Text _before={{ content: "'2022 '", color: "telegram.500" }}>
-          Developed by Alan Martinez
-        </Text>
+      <HStack color='whiteAlpha.900' divider={<StackDivider />}>
+        <HStack>
+          <Icon as={BiCopyright} />
+          <Text>2022 Developed by Alan Martinez</Text>
+        </HStack>
+        <Text>All rights reserved</Text>
       </HStack>
     </VStack>
   );
