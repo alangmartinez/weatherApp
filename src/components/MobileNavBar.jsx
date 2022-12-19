@@ -1,23 +1,16 @@
 import {
-  Icon,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerBody,
-  VStack,
-  Text,
-  useDisclosure,
-  Box,
-  StackDivider,
-  DrawerFooter,
-  Button,
+  Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerOverlay, HStack, Icon, IconButton, StackDivider, Text, useColorMode,
+  useColorModeValue, useDisclosure, VStack
 } from "@chakra-ui/react";
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import SignUpModal from "./SignUpModal";
 
 export default function MobileNavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { toggleColorMode } = useColorMode();
+
   const pages = [
     {
       name: "Home",
@@ -37,16 +30,26 @@ export default function MobileNavBar() {
     },
   ];
 
+  const icon = useColorModeValue(<BsFillMoonFill/>, <BsFillSunFill/>);
+
   return (
-    <Box>
+    <>
+    <HStack w='100%' justifyContent='space-between'>
       <Icon
         as={HiMenu}
-        boxSize={9}
-        color="black"
+        boxSize={8}
         onClick={onOpen}
         cursor="pointer"
       />
-      <Drawer isOpen={isOpen} onClose={onClose} placement="right">
+      <HStack spacing={10}>
+      <IconButton aria-label="change color mode" icon={icon} onClick={toggleColorMode} isRound variant='solid'/>
+      <HStack spacing={3}>
+        <Button variant='ghost' colorScheme='facebook'>Log In</Button>
+        <Button variant='solid' shadow='md' colorScheme='facebook' onClick={onOpen}>Sign Up</Button>
+      </HStack>
+      </HStack>
+    </HStack>
+      <Drawer isOpen={isOpen} onClose={onClose} placement="left">
         <DrawerOverlay />
         <DrawerContent
           boxShadow="lg"
@@ -93,6 +96,7 @@ export default function MobileNavBar() {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </Box>
+      <SignUpModal isOpen={isOpen} onClose={onClose}/>
+    </>
   );
 }
