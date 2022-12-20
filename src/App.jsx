@@ -9,32 +9,34 @@ import HomePage from "./pages/Home/index";
 
 function App() {
   return (
-    <Container maxW="container.xl" width="full">
-      <Header />
+    <>
       <VStack spacing={16}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="favorites" element={<Favorites />} />
-          <Route path="help" element={<Help />} />
-          <Route
-            path="*"
-            element={
-              <Container centerContent>
-                <Text
-                  as="h1"
-                  textAlign="center"
-                  fontSize="xl"
-                  fontWeight="semibold"
-                >
-                  404 Nothing Found
-                </Text>
-              </Container>
-            }
-          />
-        </Routes>
-        <Footer />
+        <Header />
+        <Container maxW="container.xl" width="full">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="favorites" element={<Favorites />} />
+            <Route path="help" element={<Help />} />
+            <Route
+              path="*"
+              element={
+                <Container centerContent>
+                  <Text
+                    as="h1"
+                    textAlign="center"
+                    fontSize="xl"
+                    fontWeight="semibold"
+                  >
+                    404 Nothing Found
+                  </Text>
+                </Container>
+              }
+            />
+          </Routes>
+          <Footer />
+        </Container>
       </VStack>
-    </Container>
+    </>
   );
 }
 

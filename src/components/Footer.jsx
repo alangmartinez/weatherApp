@@ -1,13 +1,15 @@
-import { Divider, Stack, Text, VStack, Icon, HStack, StackDivider } from "@chakra-ui/react";
+import { Divider, Stack, Text, VStack, Icon, HStack, StackDivider, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import SocialMedia from "./SocialMedia";
 
 import { BiCopyright } from "react-icons/bi";
 
 const Footer = () => {
+  const color = useColorModeValue('blackAlpha.900', 'whiteAlpha.900');
+
   return (
     <VStack spacing={10} pb={10} w="full">
-      <Divider borderColor="whiteAlpha.900" />
+      <Divider borderColor={color} w='90%'/>
       <Stack
         spacing={{ base: 12 }}
         direction={{ base: "column", md: "row" }}
@@ -20,7 +22,7 @@ const Footer = () => {
           align={{ base: "center", md: "start" }}
           fontSize={19}
           spacing={2}
-          color="whiteAlpha.900"
+          color={color}
         >
           <Link to="/">
             <Text>Home</Text>
@@ -35,9 +37,9 @@ const Footer = () => {
             <Text>Help</Text>
           </Link>
         </VStack>
-        <SocialMedia boxSize={10} color="white" />
+        <SocialMedia boxSize={10} />
       </Stack>
-      <HStack color='whiteAlpha.900' divider={<StackDivider />}>
+      <HStack color={color} divider={<StackDivider />}>
         <HStack>
           <Icon as={BiCopyright} />
           <Text>2022 Developed by Alan Martinez</Text>

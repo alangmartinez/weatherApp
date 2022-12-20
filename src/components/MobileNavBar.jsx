@@ -1,23 +1,30 @@
 import {
-  Icon,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerBody,
-  VStack,
-  Text,
-  useDisclosure,
-  Box,
-  StackDivider,
-  DrawerFooter,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerOverlay,
+  HStack,
+  Icon,
+  IconButton,
+  StackDivider,
+  Text,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import SignUpModal from "./SignUpModal";
 
 export default function MobileNavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { toggleColorMode } = useColorMode();
+
   const pages = [
     {
       name: "Home",
@@ -37,24 +44,50 @@ export default function MobileNavBar() {
     },
   ];
 
+  const icon = useColorModeValue(<BsFillMoonFill />, <BsFillSunFill />);
+
   return (
-    <Box>
-      <Icon
-        as={HiMenu}
-        boxSize={9}
-        color="black"
-        onClick={onOpen}
-        cursor="pointer"
-      />
-      <Drawer isOpen={isOpen} onClose={onClose} placement="right">
-        <DrawerOverlay />
+    <>
+      <HStack w="100%" justifyContent="space-between">
+        <Icon as={HiMenu} boxSize={8} onClick={onOpen} cursor="pointer" />
+        <HStack spacing={10}>
+          <IconButton
+            aria-label="change color mode"
+            icon={icon}
+            onClick={toggleColorMode}
+            isRound
+            variant="solid"
+          />
+          <HStack spacing={3}>
+            <Button variant="ghost" colorScheme="facebook">
+              Log In
+            </Button>
+            <Button
+              variant="solid"
+              shadow="md"
+              colorScheme="facebook"
+              onClick={onOpen}
+            >
+              Sign Up
+            </Button>
+          </HStack>
+        </HStack>
+      </HStack>
+      <Drawer isOpen={isOpen} onClose={onClose} placement="left">
+        <DrawerOverlay
+          bgColor="whiteAlpha.200"
+          backdropFilter="auto"
+          backdropBlur="6px"
+        />
         <DrawerContent
           boxShadow="lg"
-          bgColor="blackAlpha.700"
+          bgColor="blackAlpha.800"
           transition="ease"
-          fontFamily="drawer"
           backdropFilter="auto"
-          backdropBlur="7px"
+          backdropBlur="9px"
+          borderRadius="lg"
+          h="90%"
+          margin='auto auto auto 4rem'
         >
           <DrawerCloseButton
             onClick={onClose}
@@ -81,18 +114,13 @@ export default function MobileNavBar() {
             </VStack>
           </DrawerBody>
           <DrawerFooter alignSelf="center">
-            <Button
-              colorScheme="telegram"
-              fontWeight="thin"
-              fontSize="md"
-              size="lg"
-              boxShadow="xl"
-            >
+            <Button colorScheme="red" p={5} boxShadow="xl" marginBottom={6}>
               Sign Out
             </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </Box>
+      {/* <SignUpModal isOpen={isOpen} onClose={onClose}/> */}
+    </>
   );
 }
