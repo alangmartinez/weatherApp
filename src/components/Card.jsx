@@ -12,12 +12,12 @@ const Card = ({ weatherData }) => {
 
   const weathersBackground = () => {
     if (weatherData.cod === 200) {
-      var typeWeather = weatherData.weather[0].main;
+      const typeWeather = weatherData.weather[0].main;
       var background = backgrounds.find(
         (background) => background?.weather === typeWeather
       );
     } else {
-      var background = backgrounds.find(
+      background = backgrounds.find(
         (background) => background?.weather === "Clear"
       );
     }
@@ -27,15 +27,14 @@ const Card = ({ weatherData }) => {
 
   return (
     <>
-      
       <VStack
         alignItems="start"
         justify="space-between"
         h="100%"
         color="whiteAlpha.900"
-        backgroundImage={weathersBackground()}
-        backgroundSize="contain"
-        backgroundRepeat="no-repeat"
+        backgroundColor='blackAlpha.800'
+        backdropBlur='.5px'
+        backdropFilter='auto'
         p={14}
         borderRadius="md"
       >
@@ -53,7 +52,11 @@ const Card = ({ weatherData }) => {
           </VStack>
           <VStack justify="space-between">
             <Image src={Clouds} boxSize="130px" />
-            <Text fontWeight="semibold">{weatherData.cod === 200 ? weatherData.weather[0].main : "Not Found"}</Text>
+            <Text fontWeight="semibold">
+              {weatherData.cod === 200
+                ? weatherData.weather[0].description.toUpperCase()
+                : "Not Found"}
+            </Text>
           </VStack>
         </VStack>
       </VStack>

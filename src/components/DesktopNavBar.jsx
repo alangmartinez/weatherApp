@@ -1,10 +1,29 @@
-import { Button, HStack, IconButton, Text } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  IconButton,
+  Text,
+  useDisclosure,
+  Modal,
+  ModalBody,
+  ModalOverlay,
+  ModalFooter,
+  ModalCloseButton,
+  VStack,
+  ModalContent,
+  ModalHeader,
+  Input,
+  StackDivider,
+  InputGroup
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-
 import { FaArrowRight } from "react-icons/fa";
 import { IoMoon } from "react-icons/io5";
+import { FiLogIn } from "react-icons/fi";
 
 export default function DesktopNavBar() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <HStack spacing={9}>
@@ -13,7 +32,7 @@ export default function DesktopNavBar() {
         </Text>
         <HStack spacing={12} paddingY={3} fontWeight="semibold" paddingX={6}>
           <Link to="/">
-            <Button variant="ghost" fontSize={18}>
+            <Button variant="ghost" colorScheme='gray' fontSize={18}>
               Home
             </Button>
           </Link>
@@ -36,7 +55,9 @@ export default function DesktopNavBar() {
         </HStack>
       </HStack>
       <HStack spacing={8}>
-        <Button variant="unstyled">Log In</Button>
+        <Button variant='ghost' size='md' onClick={onOpen}>
+          Log In
+        </Button>
         <Button
           boxShadow="md"
           colorScheme="facebook"
@@ -46,6 +67,29 @@ export default function DesktopNavBar() {
           Sign Up
         </Button>
       </HStack>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Log In :</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {" "}
+            <VStack divider={<StackDivider w='50%' alignSelf borderColor='blackAlpha.500'/>} spacing={6}>
+              <InputGroup></InputGroup>
+              <Input placeholder="Password" type="password" />
+            </VStack>
+          </ModalBody>
+          <ModalFooter>
+            <HStack spacing={4}>
+              <Button variant="ghost" colorScheme='gray' onClick={onClose}>
+                Close
+              </Button>
+              <Button rightIcon={<FiLogIn/>} variant="solid" colorScheme='facebook' borderRadius='md'>Log In</Button>
+            </HStack>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }
