@@ -50,14 +50,17 @@ export default function MobileNavBar() {
       </HStack>
     </HStack>
       <Drawer isOpen={isOpen} onClose={onClose} placement="left">
-        <DrawerOverlay />
+        <DrawerOverlay bgColor='whiteAlpha.200' backdropFilter='auto' backdropBlur='6px' />
         <DrawerContent
           boxShadow="lg"
           bgColor="blackAlpha.700"
           transition="ease"
-          fontFamily="drawer"
           backdropFilter="auto"
-          backdropBlur="7px"
+          backdropBlur="9px"
+          borderRadius='md'
+          h='90%'
+          alignSelf='center'
+          marginLeft={8}
         >
           <DrawerCloseButton
             onClick={onClose}
@@ -85,18 +88,17 @@ export default function MobileNavBar() {
           </DrawerBody>
           <DrawerFooter alignSelf="center">
             <Button
-              colorScheme="telegram"
-              fontWeight="thin"
-              fontSize="md"
-              size="lg"
+              colorScheme="red"
+              p={5}
               boxShadow="xl"
+              marginBottom={6}
             >
               Sign Out
             </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-      <SignUpModal isOpen={isOpen} onClose={onClose}/>
+      {/* <SignUpModal isOpen={isOpen} onClose={onClose}/> */}
     </>
   );
 }

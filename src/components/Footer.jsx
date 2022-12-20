@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <VStack spacing={10} pb={10} w="full">
-      <Divider borderColor={color} />
+      <Divider borderColor={color} w='90%'/>
       <Stack
         spacing={{ base: 12 }}
         direction={{ base: "column", md: "row" }}

@@ -1,6 +1,5 @@
 import { Heading, Image, Text, VStack } from "@chakra-ui/react";
 import Clouds from "../../public/images/icons/clouds.png";
-import { backgrounds } from "../backgrounds";
 
 const Card = ({ weatherData }) => {
   const icons = [
@@ -10,20 +9,6 @@ const Card = ({ weatherData }) => {
     },
   ];
 
-  const weathersBackground = () => {
-    if (weatherData.cod === 200) {
-      var typeWeather = weatherData.weather[0].main;
-      var background = backgrounds.find(
-        (background) => background?.weather === typeWeather
-      );
-    } else {
-      var background = backgrounds.find(
-        (background) => background?.weather === "Clear"
-      );
-    }
-    console.log("background:", background);
-    return background?.urlImage;
-  };
 
   return (
     <>
@@ -32,10 +17,6 @@ const Card = ({ weatherData }) => {
         alignItems="start"
         justify="space-between"
         h="100%"
-        color="whiteAlpha.900"
-        backgroundImage={weathersBackground()}
-        backgroundSize="contain"
-        backgroundRepeat="no-repeat"
         p={14}
         borderRadius="md"
       >
