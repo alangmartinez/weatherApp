@@ -18,8 +18,11 @@ const Card = ({ weatherData }) => {
         h="100%"
         p={14}
         borderRadius="md"
+        bgColor='blackAlpha.800'
+        backdropFilter='auto'
+        backdropBlur='20px'
       >
-        <VStack align="start" justify="center">
+        <VStack align="start" justify="center" color='whitesmoke'>
           <VStack spacing="4px" align="start">
             <Heading fontSize="3xl" fontWeight="bold">
               {weatherData.name}, {weatherData.sys?.country}

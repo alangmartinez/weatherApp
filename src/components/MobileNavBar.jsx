@@ -14,12 +14,11 @@ import {
   useColorMode,
   useColorModeValue,
   useDisclosure,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import SignUpModal from "./SignUpModal";
 
 export default function MobileNavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -120,7 +119,6 @@ export default function MobileNavBar() {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-      {/* <SignUpModal isOpen={isOpen} onClose={onClose}/> */}
     </>
   );
 }

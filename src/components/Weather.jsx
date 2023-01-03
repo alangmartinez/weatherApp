@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import SearchBar from "./SearchBar";
 import { BiPlus } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 export default function Weather() {
   const bgColor = useColorModeValue("blackAlpha.800", "whiteAlpha.800");
@@ -77,43 +78,49 @@ export default function Weather() {
           bgColor={bgColor}
           p="1.5rem 2rem"
           backdropFilter="auto"
-          backdropBlur="4px"
+          backdropBlur="20px"
           color={color}
         >
           <VStack spacing={4} align="start">
-            <Heading>About Us</Heading>
-            <Text>
+            <Heading color="whitesmoke">About Us</Heading>
+            <Text flex={2} color="#eaeaea">
               This App was created with the purpose of helping people with their
               travels, as they should anticipate what to wear based on the
               weather in the destination city.
             </Text>
             <Button
+              color="whitesmoke"
               rightIcon={<BiPlus />}
-              variant="ghost"
+              variant="unstyled"
               alignSelf="end"
-              colorScheme="black"
             >
-              See More
+              <Link to="/about-us">See More</Link>
             </Button>
           </VStack>
         </GridItem>
         <GridItem
           borderRadius="md"
-          bgColor={bgColor}
+          bgColor="blackAlpha.800"
           p="1.5rem 2rem"
           backdropFilter="auto"
-          backdropBlur="4px"
-          color={color}
+          backdropBlur="20px"
+          boxShadow="dark-lg"
         >
-          <VStack spacing={4} align="start">
-            <Heading>Help</Heading>
+          <VStack spacing={4} align="start" h="full">
+            <Heading color="whitesmoke">Help</Heading>
+            <Text flex={2} color="#eaeaea">
+              Did you find something wrong with the application?
+              <br />
+              Complete the form!
+              And let us know.
+            </Text>
             <Button
+              color="whitesmoke"
               rightIcon={<BiPlus />}
-              variant="ghost"
+              variant="unstyled"
               alignSelf="end"
-              colorScheme="black"
             >
-              See More
+              <Link to="/help">See More</Link>
             </Button>
           </VStack>
         </GridItem>

@@ -37,7 +37,7 @@ const HelpForm = ({ variant }) => {
     >
       {({ handleChange, handleBlur, touched, values, errors }) => (
         <Form>
-          <VStack spacing={8} color="blackAlpha.900">
+          <VStack spacing={8}>
             <FormControl isRequired isInvalid={touched.name && errors.name}>
               <Tooltip
                 placement="left"
@@ -55,7 +55,6 @@ const HelpForm = ({ variant }) => {
               <InputGroup>
                 <InputLeftElement children={<FaInfo />}></InputLeftElement>
                 <Input
-                  color="blackAlpha.900"
                   variant={variant}
                   placeholder="Name..."
                   name="name"

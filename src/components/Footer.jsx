@@ -5,11 +5,10 @@ import SocialMedia from "./SocialMedia";
 import { BiCopyright } from "react-icons/bi";
 
 const Footer = () => {
-  const color = useColorModeValue('blackAlpha.900', 'whiteAlpha.900');
 
   return (
     <VStack spacing={10} pb={10} w="full">
-      <Divider borderColor={color} w='90%'/>
+      <Divider w='90%' borderColor='#eaeaea'/>
       <Stack
         spacing={{ base: 12 }}
         direction={{ base: "column", md: "row" }}
@@ -21,8 +20,9 @@ const Footer = () => {
         <VStack
           align={{ base: "center", md: "start" }}
           fontSize={19}
-          spacing={2}
-          color={color}
+          spacing={4}
+          fontWeight='medium'
+          color='whiteSmoke'
         >
           <Link to="/">
             <Text>Home</Text>
@@ -39,7 +39,7 @@ const Footer = () => {
         </VStack>
         <SocialMedia boxSize={10} />
       </Stack>
-      <HStack color={color} divider={<StackDivider />}>
+      <HStack divider={<StackDivider />}>
         <HStack>
           <Icon as={BiCopyright} />
           <Text>2022 Developed by Alan Martinez</Text>

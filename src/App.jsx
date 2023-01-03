@@ -6,17 +6,38 @@ import Header from "./components/Header";
 import Favorites from "./pages/Favorites/index";
 import Help from "./pages/Help/index";
 import HomePage from "./pages/Home/index";
+import AboutUs from "./pages/AboutUs/index";
 
 function App() {
+
+  const pages = [
+    {
+      name: "Home",
+      path: "/",
+      component: <HomePage/>,
+    },
+    {
+      name: "Favorites",
+      path: "/favorites",
+      component: <Favorites/>,
+    },{
+      name: "About Us",
+      path: "/about-us",
+      component: <AboutUs/>,
+    },
+    {
+      name: "Help",
+      path: "/help",
+      component: <Help/>,
+    },
+  ];
+
   return (
     <>
       <VStack spacing={16}>
         <Header />
         <Container maxW="container.xl" width="full">
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="favorites" element={<Favorites />} />
-            <Route path="help" element={<Help />} />
             <Route
               path="*"
               element={
@@ -32,6 +53,11 @@ function App() {
                 </Container>
               }
             />
+            {
+              pages.map( page => ( 
+                <Route path={page.path} element={page.component} key={page.name} />
+              ))
+            }
           </Routes>
           <Footer />
         </Container>

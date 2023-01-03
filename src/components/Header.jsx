@@ -13,7 +13,7 @@ const Header = () => {
     const scrollHeight = window.scrollY;
 
     scrollHeight > navHeight
-      ? setBgColor("#1314153b")
+      ? setBgColor("#13141535")
       : setBgColor("transparent");
   }
 
@@ -26,11 +26,13 @@ const Header = () => {
       as="header"
       position="sticky"
       top={0}
-      backdropFilter='auto'
-      backdropBlur='5px'
+      backdropFilter={bgColor === "transparent" ? "none" : "blur(5px)"}
+      backdropBlur={bgColor === "transparent" ? "none" : "blur(5px)"}
+      boxShadow={bgColor === "transparent" ? "none" : "lg"}
       w="full"
       zIndex="sticky"
       bgColor={bgColor}
+      transition="all .35s ease-in-out"
     >
       <Container maxW="container.xl" as="nav">
         <HStack justify="space-between" paddingY={5}>

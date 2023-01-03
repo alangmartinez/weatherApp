@@ -1,28 +1,27 @@
 import {
   Button,
-  HStack,
-  IconButton,
-  Text,
-  useDisclosure,
-  Modal,
+  HStack, Modal,
   ModalBody,
-  ModalOverlay,
-  ModalFooter,
   ModalCloseButton,
-  VStack,
   ModalContent,
   ModalHeader,
-  Input,
-  StackDivider,
-  InputGroup
+  ModalOverlay,
+  Text,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import LogInForm from "./LogInForm";
+
+import { BsSunFill } from "react-icons/bs";
 import { FaArrowRight } from "react-icons/fa";
 import { IoMoon } from "react-icons/io5";
-import { FiLogIn } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function DesktopNavBar() {
+  const { toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const icon = useColorModeValue(<IoMoon />, <BsSunFill />);
 
   return (
     <>
@@ -32,7 +31,7 @@ export default function DesktopNavBar() {
         </Text>
         <HStack spacing={12} paddingY={3} fontWeight="semibold" paddingX={6}>
           <Link to="/">
-            <Button variant="ghost" colorScheme='gray' fontSize={18}>
+            <Button variant="ghost" colorScheme="gray" fontSize={18}>
               Home
             </Button>
           </Link>
@@ -51,43 +50,37 @@ export default function DesktopNavBar() {
               Help
             </Button>
           </Link>
-          <IconButton icon={<IoMoon />} />
+
         </HStack>
       </HStack>
       <HStack spacing={8}>
-        <Button variant='ghost' size='md' onClick={onOpen}>
+        <Button variant="ghost" size="lg" fontSize='xl' onClick={onOpen}>
           Log In
         </Button>
         <Button
+        fontSize='xl'
           boxShadow="md"
           colorScheme="facebook"
-          size="lg"
+          p="1.8rem 2rem"
+          size='lg'
           rightIcon={<FaArrowRight />}
         >
           Sign Up
         </Button>
       </HStack>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay
+          backdropFilter="auto"
+          backdropBlur="14px"
+          bgColor="whiteAlpha.100"
+        />
+        <ModalContent p="1rem 1rem" boxShadow="dark-lg">
           <ModalHeader>Log In :</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {" "}
-            <VStack divider={<StackDivider w='50%' alignSelf borderColor='blackAlpha.500'/>} spacing={6}>
-              <InputGroup></InputGroup>
-              <Input placeholder="Password" type="password" />
-            </VStack>
+            <LogInForm onClose={onClose} />
           </ModalBody>
-          <ModalFooter>
-            <HStack spacing={4}>
-              <Button variant="ghost" colorScheme='gray' onClick={onClose}>
-                Close
-              </Button>
-              <Button rightIcon={<FiLogIn/>} variant="solid" colorScheme='facebook' borderRadius='md'>Log In</Button>
-            </HStack>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
