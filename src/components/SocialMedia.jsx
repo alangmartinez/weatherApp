@@ -1,8 +1,9 @@
 import { HStack, Icon } from "@chakra-ui/react";
-import { FaFacebookF, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { IoIosMail } from 'react-icons/io';
 
 export default function SocialMedia({ boxSize }) {
-  const icons = [FaGithub, FaTwitter, FaFacebookF, FaLinkedin];
+  const icons = [FaGithub, FaTwitter, IoIosMail, FaLinkedin];
   return (
       <HStack spacing={7} color='whitesmoke'>
         {icons.map((icon, index) => (

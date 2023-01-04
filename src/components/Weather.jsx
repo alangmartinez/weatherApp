@@ -7,6 +7,7 @@ import {
   Heading,
   Text,
   Button,
+  AspectRatio,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Card from "./Card";
@@ -52,12 +53,18 @@ export default function Weather() {
     <VStack spacing={24} marginBottom={24}>
       <SearchBar fetchWeather={fetchWeather} />
       <Grid
-        templateColumns="repeat(3, 1fr)"
+        templateColumns="repeat(5, 1fr)"
         templateRows="repeat(4, 1fr)"
         gap={6}
         w="full"
       >
-        <GridItem colSpan={2} rowSpan={4} boxShadow="dark-lg" borderRadius="lg">
+        <GridItem
+          colStart={1}
+          colEnd={4}
+          rowSpan={2}
+          boxShadow="dark-lg"
+          borderRadius="lg"
+        >
           {isFetching ? (
             <Spinner
               label="Loading..."
@@ -72,8 +79,8 @@ export default function Weather() {
           )}
         </GridItem>
         <GridItem
-          colStart={3}
-          colEnd={4}
+          colStart={4}
+          colEnd={6}
           borderRadius="md"
           bgColor={bgColor}
           p="1.5rem 2rem"
@@ -105,14 +112,15 @@ export default function Weather() {
           backdropFilter="auto"
           backdropBlur="20px"
           boxShadow="dark-lg"
+          colStart={4}
+          colEnd={6}
         >
           <VStack spacing={4} align="start" h="full">
             <Heading color="whitesmoke">Help</Heading>
             <Text flex={2} color="#eaeaea">
               Did you find something wrong with the application?
               <br />
-              Complete the form!
-              And let us know.
+              Complete the form! And let us know.
             </Text>
             <Button
               color="whitesmoke"
@@ -122,6 +130,36 @@ export default function Weather() {
             >
               <Link to="/help">See More</Link>
             </Button>
+          </VStack>
+        </GridItem>
+        <GridItem
+          colStart={3}
+          colEnd={6}
+          rowStart={3}
+          rowEnd={5}
+          boxShadow="dark-lg"
+        >
+          <AspectRatio ratio={4 / 3}>
+            <iframe
+              allowFullScreen
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d24905.79861531505!2d-62.24936960000001!3d-38.7126469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1672775140955!5m2!1ses-419!2sar"
+            ></iframe>
+          </AspectRatio>
+        </GridItem>
+        <GridItem
+          colStart={1}
+          colEnd={3}
+          rowStart={3}
+          rowEnd={5}
+          bgColor="blackAlpha.800"
+          p="1.5rem 2rem"
+          borderRadius="md"
+          boxShadow="dark-lg"
+          backdropFilter="auto"
+          backdropBlur="20px"
+        >
+          <VStack align='start'>
+            <Heading color="whitesmoke">Favorites</Heading>
           </VStack>
         </GridItem>
       </Grid>

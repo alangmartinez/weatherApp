@@ -6,26 +6,19 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Text,
-  useColorMode,
-  useColorModeValue,
-  useDisclosure
+  Text, useDisclosure
 } from "@chakra-ui/react";
+import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import LogInForm from "./LogInForm";
 
-import { BsSunFill } from "react-icons/bs";
-import { FaArrowRight } from "react-icons/fa";
-import { IoMoon } from "react-icons/io5";
-import { Link } from "react-router-dom";
-
-export default function DesktopNavBar() {
-  const { toggleColorMode } = useColorMode();
+export default function DesktopNavBar({color}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const icon = useColorModeValue(<IoMoon />, <BsSunFill />);
+
 
   return (
     <>
-      <HStack spacing={9}>
+      <HStack spacing={9} color={color}>
         <Text fontWeight="bold" fontSize="3xl">
           Weather App
         </Text>
@@ -50,11 +43,10 @@ export default function DesktopNavBar() {
               Help
             </Button>
           </Link>
-
         </HStack>
       </HStack>
       <HStack spacing={8}>
-        <Button variant="ghost" size="lg" fontSize='xl' onClick={onOpen}>
+        <Button variant="ghost" size="lg" fontSize='xl' onClick={onOpen} color={color}>
           Log In
         </Button>
         <Button
