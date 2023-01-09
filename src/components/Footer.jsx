@@ -7,7 +7,7 @@ import { BiCopyright } from "react-icons/bi";
 const Footer = () => {
 
   return (
-    <VStack spacing={10} pb={10} w="full">
+    <VStack spacing={10} pb={10} w="full" marginTop={20}>
       <Divider w='90%' borderColor='#eaeaea'/>
       <Stack
         spacing={{ base: 12 }}

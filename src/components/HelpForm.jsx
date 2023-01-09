@@ -22,7 +22,7 @@ const HelpForm = ({ variant }) => {
         tel: "",
         message: "",
       }}
-      validate={() => useFormValidation({values})}
+      validate={(values) => useFormValidation({values})}
       onSubmit={(values, { resetForm }) => {
         resetForm();
         toast({

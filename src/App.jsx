@@ -7,6 +7,7 @@ import Favorites from "./pages/Favorites/index";
 import Help from "./pages/Help/index";
 import HomePage from "./pages/Home/index";
 import AboutUs from "./pages/AboutUs/index";
+import SignUp from "./pages/SignUp/index";
 
 function App() {
 
@@ -30,6 +31,11 @@ function App() {
       path: "/help",
       component: <Help/>,
     },
+    {
+      name: 'Sign Up',
+      path: "/sign-up",
+      component: <SignUp/>,
+    }
   ];
 
   return (

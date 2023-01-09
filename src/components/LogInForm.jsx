@@ -17,15 +17,21 @@ import { FiLogIn } from "react-icons/fi";
 import useLogInValidation from "../hooks/useLogInValidation";
 
 function LogInForm({ onClose }) {
+  function validateUser({ values }) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user.email === values.email && user.password === values.password) {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <>
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={(values) => useLogInValidation(values)}
         onSubmit={(values, { resetForm }) => {
-          console.log(values);
-          resetForm();
-          onClose();
+          validateUser({ values }) && onClose();
         }}
       >
         {({
@@ -38,7 +44,7 @@ function LogInForm({ onClose }) {
         }) => (
           <Form onSubmit={() => handleSubmit()}>
             <VStack spacing={6} py={6} px={5}>
-              <VStack spacing={3} w='full'>
+              <VStack spacing={3} w="full">
                 {/* Email Field */}
                 <FormControl
                   isRequired
@@ -95,7 +101,7 @@ function LogInForm({ onClose }) {
                 </FormControl>
               </VStack>
 
-              <Divider w="62%" borderColor='blackAlpha.600'/>
+              <Divider w="62%" borderColor="blackAlpha.600" />
 
               {/* Buttons */}
               <Button

@@ -50,7 +50,7 @@ export default function Weather() {
   }, []);
 
   return (
-    <VStack spacing={24} marginBottom={24}>
+    <VStack spacing={24}>
       <SearchBar fetchWeather={fetchWeather} />
       <Grid
         templateColumns="repeat(5, 1fr)"
@@ -150,6 +150,22 @@ export default function Weather() {
           colStart={1}
           colEnd={3}
           rowStart={3}
+          rowEnd={4}
+          bgColor="blackAlpha.800"
+          p="1.5rem 2rem"
+          borderRadius="md"
+          boxShadow="dark-lg"
+          backdropFilter="auto"
+          backdropBlur="20px"
+        >
+          <VStack align="start">
+            <Heading color="whitesmoke">Favorites</Heading>
+          </VStack>
+        </GridItem>
+        <GridItem
+          colStart={1}
+          colEnd={3}
+          rowStart={4}
           rowEnd={5}
           bgColor="blackAlpha.800"
           p="1.5rem 2rem"
@@ -158,9 +174,9 @@ export default function Weather() {
           backdropFilter="auto"
           backdropBlur="20px"
         >
-          <VStack align='start'>
-            <Heading color="whitesmoke">Favorites</Heading>
-          </VStack>
+          <Heading as="h2" color="whitesmoke">
+            Favorites
+          </Heading>
         </GridItem>
       </Grid>
     </VStack>

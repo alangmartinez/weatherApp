@@ -6,6 +6,7 @@ import {
   Text,
   Heading,
   VStack,
+  Divider,
 } from "@chakra-ui/react";
 import profile from "../../assets/profile/profile.jpg";
 
@@ -28,27 +29,28 @@ export default function AboutUs({ props }) {
           colSpan={4}
           p={10}
           borderRadius="lg"
-          bgColor="blackAlpha.800"
+          bgColor="whiteAlpha.800"
           backdropFilter="auto"
           backdropBlur="20px"
           boxShadow="dark-lg"
         >
           <VStack align="start">
-            <Heading as="h2" color="whitesmoke">
-              Hi!
-              <br />
-              I'm Alan Martinez
-            </Heading>
-            <Text color="whiteAlpha.800" fontWeight="medium">
+            <VStack color="blackAlpha.800" spacing={0} marginBottom={2} align='start'>
+              <Heading as="h2">Hi!</Heading>
+              <Heading as="h2" _after={{ content: "' Alan Martinez'", color: 'blue.500' }}>I'm</Heading>
+            </VStack>
+            <Text color="blackAlpha.700" fontWeight="medium">
               Welcome to my weather app!
               <br />
               This App was created with the purpose of helping people with their
               travels, as they should anticipate what to wear based on the
               weather in the destination city.
-              <br/>
-              Also this is one of my first projects with React, so I hope you like it!
-              <br/>
-              In the footer you can find my social media and my email, feel free to contact me!
+              <br />
+              Also this is one of my first projects with React, so I hope you
+              like it!
+              <br />
+              In the footer you can find my social media and my email, feel free
+              to contact me!
             </Text>
           </VStack>
         </GridItem>
